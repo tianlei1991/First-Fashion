@@ -1,0 +1,58 @@
+//
+//  ShareWebViewController.m
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/22.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#import "ShareWebViewController.h"
+
+@interface ShareWebViewController ()<UIWebViewDelegate>
+
+@property (nonatomic,strong) UIWebView *webview;
+
+@end
+
+@implementation ShareWebViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    NSURL *url = [NSURL URLWithString:self.urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    self.webview.delegate = self;
+    [self.webview loadRequest:request];
+    [self setupBackButton];
+}
+- (void)setupBackButton{
+
+    UIImage *image = [[UIImage  imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, image.size.width/2, image.size.height/2);
+    [button addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    
+
+
+
+
+}
+- (void)goBack{
+
+    [self.navigationController popoverPresentationController];
+
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

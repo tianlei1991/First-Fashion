@@ -1,0 +1,26 @@
+//
+//  URLInterface.h
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/21.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#ifndef URLInterface_h
+#define URLInterface_h
+//精选url
+#define SELECURL  @"http://moguapp.mogujie.com/v3/news/selected?_cityId=13a&strDayTime=2016-09-22%2000%3A00%3A00"
+//发现
+#define DISCOVERURL @"http://moguapp.mogujie.com/v3/discover?_network=1&_atype=ios&_t=1474284428&_app=mogu&_channel=NIGAppStore&_lang=0&_cityId=13a&_version=2.4.2&_locationPos=22.584953%2C113.957459&_fs=ios&sign=&_at=8cd63a9a399f7ced&_swidth=640&_ab=2546&_newdid=cd94df6283ab9992cebe19c1595d6540&_pt=0&_uid=1257400a&_country=%E4%B8%AD%E5%9B%BD&minfo=iPhone4%2C1&preview=0&_ip=192.168.2.38&_location=%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%8D%97%E5%B1%B1%E5%8C%BA%E6%A1%83%E6%BA%90%E8%A1%97%E9%81%93%E7%95%99%E4%BB%99%E5%A4%A7%E9%81%93&_av=242"
+//品牌
+#define BRANDURL @"http://moguapp.mogujie.com/v2/brand/discover?_t=1474548505%20&_cityId=13a"
+//品牌headView的五个图片
+#define BRANDHEADIMG1 @"http://moguapp.mogujie.com/news/detail?_network=1&_atype=ios&_t=1474428883&_app=mogu&_channel=NIGAppStore&_lang=0&_cityId=13a&_version=2.4.2&_locationPos=22.583112%2C113.956974&_fs=ios&sign=&dailyNewsTime=0&_at=ebbd863a345cf18a&_swidth=640&_ab=2546&_newdid=cd94df6283ab9992cebe19c1595d6540&_pt=0&_uid=1257400a&newsId=083c1e&_country=%E4%B8%AD%E5%9B%BD&minfo=iPhone4%2C1&preview=0&_ip=192.168.2.38&_location=%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%8D%97%E5%B1%B1%E5%8C%BA%E6%A1%83%E6%BA%90%E8%A1%97%E9%81%93%E7%95%99%E4%BB%99%E5%A4%A7%E9%81%931285%E5%8F%B7&_av=242"
+
+#define BRANDHEADIMG2 @"http://moguapp.mogujie.com/news/detail?_network=1&_atype=ios&_t=1474429430&_app=mogu&_channel=NIGAppStore&_lang=0&_cityId=13a&_version=2.4.2&_locationPos=22.583112%2C113.956974&_fs=ios&sign=&dailyNewsTime=0&_at=eb30cd97bcb162fc&_swidth=640&_ab=2546&_newdid=cd94df6283ab9992cebe19c1595d6540&_pt=0&_uid=1257400a&newsId=383942&_country=%E4%B8%AD%E5%9B%BD&minfo=iPhone4%2C1&preview=0&_ip=192.168.2.38&_location=%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%8D%97%E5%B1%B1%E5%8C%BA%E6%A1%83%E6%BA%90%E8%A1%97%E9%81%93%E7%95%99%E4%BB%99%E5%A4%A7%E9%81%931285%E5%8F%B7&_av=242"
+#define BRANDHEADIMG3 @"http://moguapp.mogujie.com/news/detail?_network=1&_atype=ios&_t=1474429594&_app=mogu&_channel=NIGAppStore&_lang=0&_cityId=13a&_version=2.4.2&_locationPos=22.583112%2C113.956974&_fs=ios&sign=&dailyNewsTime=0&_at=a7df8796dfecb5c9&_swidth=640&_ab=2546&_newdid=cd94df6283ab9992cebe19c1595d6540&_pt=0&_uid=1257400a&newsId=483c02&_country=%E4%B8%AD%E5%9B%BD&minfo=iPhone4%2C1&preview=0&_ip=192.168.2.38&_location=%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%8D%97%E5%B1%B1%E5%8C%BA%E6%A1%83%E6%BA%90%E8%A1%97%E9%81%93%E7%95%99%E4%BB%99%E5%A4%A7%E9%81%931285%E5%8F%B7&_av=242"
+#define BRANDHEADIMG4 @"http://moguapp.mogujie.com/news/detail?_network=1&_atype=ios&_t=1474429773&_app=mogu&_channel=NIGAppStore&_lang=0&_cityId=13a&_version=2.4.2&_locationPos=22.583112%2C113.956974&_fs=ios&sign=&dailyNewsTime=0&_at=0b0e5e1a7c2b7b80&_swidth=640&_ab=2546&_newdid=cd94df6283ab9992cebe19c1595d6540&_pt=0&_uid=1257400a&newsId=873e36&_country=%E4%B8%AD%E5%9B%BD&minfo=iPhone4%2C1&preview=0&_ip=192.168.2.38&_location=%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%8D%97%E5%B1%B1%E5%8C%BA%E6%A1%83%E6%BA%90%E8%A1%97%E9%81%93%E7%95%99%E4%BB%99%E5%A4%A7%E9%81%931285%E5%8F%B7&_av=242"
+
+#define BRANDHEADIMG5 @"http://moguapp.mogujie.com/news/detail?_network=1&_atype=ios&_t=1474429815&_app=mogu&_channel=NIGAppStore&_lang=0&_cityId=13a&_version=2.4.2&_locationPos=22.583112%2C113.956974&_fs=ios&sign=&dailyNewsTime=0&_at=c6d8326c8767fcfe&_swidth=640&_ab=2546&_newdid=cd94df6283ab9992cebe19c1595d6540&_pt=0&_uid=1257400a&newsId=4894e2&_country=%E4%B8%AD%E5%9B%BD&minfo=iPhone4%2C1&preview=0&_ip=192.168.2.38&_location=%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%8D%97%E5%B1%B1%E5%8C%BA%E6%A1%83%E6%BA%90%E8%A1%97%E9%81%93%E7%95%99%E4%BB%99%E5%A4%A7%E9%81%931285%E5%8F%B7&_av=242"
+
+#endif

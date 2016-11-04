@@ -1,0 +1,155 @@
+//
+//  DiscoverVC.m
+//  Togou界面
+//
+//  Created by hj on 16/9/12.
+//  Copyright © 2016年 TL. All rights reserved.
+//
+
+#import "DiscoverVC.h"
+#import "DisCoverModel.h"
+#import "DisCoverCell.h"
+#import "TopLestModel.h"
+#import "topCell.h"
+@interface DiscoverVC ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,strong) UITableView *tableview;
+@property (nonatomic,strong) NSMutableArray *dataSoucer;
+@property (nonatomic,strong) NSMutableArray *TopDataSoucer;
+@end
+
+@implementation DiscoverVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    [self downLoadData];
+    [self CreatUI];
+    //获取通知！
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(recive:) name:@"valueChange" object:nil];
+}
+- (NSMutableArray *)TopDataSoucer{
+
+    if (_TopDataSoucer == nil) {
+        _TopDataSoucer = [NSMutableArray array];
+    }
+    return _TopDataSoucer;
+
+}
+-(NSMutableArray *)dataSoucer{
+    if (_dataSoucer==nil) {
+        _dataSoucer = [NSMutableArray array];
+    }
+    return _dataSoucer;
+
+}
+- (void)downLoadData{
+    AFmanage *mange = [AFmanage ShareInstance];
+    [mange getDataFormNet:DISCOVERURL andSuccsee:^(id object) {
+        //下载channerNewList
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:object options:0 error:0];
+     NSArray *channeArr = dict[@"result"][@"channelNewsList"];
+        for (NSDictionary *chandict in channeArr) {
+            DisCoverModel *modle = [[DisCoverModel alloc]initWithDictionary:chandict error:nil];
+            [self.dataSoucer addObject:modle];
+    
+        }
+           //下载topicList，topic主题
+        NSArray *topolTistArr = dict[@"result"][@"topicList"];
+        for (NSDictionary *topdict in topolTistArr) {
+            TopLestModel *topModel = [[TopLestModel alloc]initWithDictionary:topdict error:nil];
+            [self.TopDataSoucer addObject:topModel];
+        }
+        [self.dataSoucer addObject:self.TopDataSoucer];
+
+        [self.tableview reloadData];
+    } and:^(NSError *error) {
+        
+    }];
+
+
+}
+
+
+- (void)CreatUI{
+    self.tableview  = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableview.dataSource = self;
+    self.tableview.delegate = self;
+    self.tableview.contentInset = UIEdgeInsetsMake([UIScreen mainScreen].bounds.origin.x+70, 0, 0, 0);
+    [self.tableview  registerNib:[UINib nibWithNibName:@"DisCoverCell" bundle:nil] forCellReuseIdentifier:@"DisCoverCell"];
+    [self.tableview registerNib:[UINib nibWithNibName:@"topCell" bundle:nil] forCellReuseIdentifier:@"topCell"];
+    [self.view addSubview:self.tableview];
+    
+
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+
+    return self.dataSoucer.count;
+
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    NSLog(@"indexPath%lddataSoucer%ld",indexPath.row,self.dataSoucer.count);
+    if (indexPath.row == self.dataSoucer.count-1) {
+        topCell *cell = [tableView dequeueReusableCellWithIdentifier:@"topCell"];
+        cell.dataSoucre = self.dataSoucer[indexPath.row];
+        return  cell;
+    }
+    
+    
+    DisCoverCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DisCoverCell"];
+    cell.model = self.dataSoucer[indexPath.row];
+    return cell;
+
+
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == self.dataSoucer.count-1) {
+        return 310;
+    }
+
+    return 270;
+
+
+}
+//开始拖拽视图
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.tableview.frame = self.view.bounds;
+        
+    }];
+    if (self.blcokchange) {
+        self.blcokchange();
+    }
+}
+
+#pragma mark 接收通知
+- (void)recive:(NSNotification *)noti
+{
+    
+    //获取通知内容；
+    UIView *view =  noti.object;
+    
+    //没有动画
+    [UIView animateWithDuration:0.5 animations:^{
+        //            self.tableView.contentInset = UIEdgeInsetsMake(CGRectGetMaxY(view.frame), 0, 0, 0);
+        self.tableview  .frame = CGRectMake(0,view.frame.origin.y-40, SCREEN.width, SCREEN.height);
+    }];
+    
+    [self.tableview reloadData];
+    
+    
+    
+}
+#pragma mark 移除通知
+- (void)dealloc
+{
+    //移除当前控制器的所有通知；
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    
+    //    移除某一个通知
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"valueChange" object:nil];
+    
+}
+
+@end

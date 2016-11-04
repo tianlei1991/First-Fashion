@@ -1,0 +1,33 @@
+//
+//  breadCell4.m
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/21.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#import "breadCell4.h"
+@interface breadCell4()
+@property (weak, nonatomic) IBOutlet UIImageView *coverImage;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@end
+@implementation breadCell4
+- (void)setModel:(Brandmodel *)model{
+    interactiveModel *model1 = (interactiveModel *)model;
+    self.titleLabel.text   = model1.title;
+    [self.coverImage sd_setImageWithURL:[NSURL URLWithString:model1.coverImg] placeholderImage:[UIImage imageNamed:@"1"]];
+    
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+ }
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+@end

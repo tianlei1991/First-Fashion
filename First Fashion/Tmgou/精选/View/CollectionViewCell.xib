@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="179" height="185"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="179" height="185"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFH-En-rBk">
+                        <rect key="frame" x="0.0" y="0.0" width="179" height="185"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NRK-g0-GCW">
+                                <rect key="frame" x="0.0" y="0.0" width="179" height="93"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sadfsad fsadf sadf asdfsadfsadf asdfsad " lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVI-i5-rtB">
+                                <rect key="frame" x="8" y="109" width="163" height="32"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oVI-i5-rtB" firstAttribute="top" secondItem="NRK-g0-GCW" secondAttribute="bottom" constant="16" id="6Zh-ak-Gnu"/>
+                            <constraint firstItem="oVI-i5-rtB" firstAttribute="leading" secondItem="eFH-En-rBk" secondAttribute="leading" constant="8" id="Tci-iH-KJl"/>
+                            <constraint firstAttribute="trailing" secondItem="oVI-i5-rtB" secondAttribute="trailing" constant="8" id="UmN-J6-ofx"/>
+                            <constraint firstItem="NRK-g0-GCW" firstAttribute="centerY" secondItem="eFH-En-rBk" secondAttribute="centerY" multiplier="0.5" id="egB-70-Dnp"/>
+                            <constraint firstAttribute="trailing" secondItem="NRK-g0-GCW" secondAttribute="trailing" id="gVB-WF-cJb"/>
+                            <constraint firstItem="NRK-g0-GCW" firstAttribute="top" secondItem="eFH-En-rBk" secondAttribute="top" id="oLB-Ek-jcH"/>
+                            <constraint firstItem="NRK-g0-GCW" firstAttribute="leading" secondItem="eFH-En-rBk" secondAttribute="leading" id="yUv-vk-O8j"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="eFH-En-rBk" secondAttribute="trailing" id="2K7-Ol-UoG"/>
+                <constraint firstItem="eFH-En-rBk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ddj-76-cu0"/>
+                <constraint firstAttribute="bottom" secondItem="eFH-En-rBk" secondAttribute="bottom" id="sTd-XB-I6y"/>
+                <constraint firstItem="eFH-En-rBk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="tmG-uc-mf3"/>
+            </constraints>
+            <size key="customSize" width="179" height="185"/>
+            <connections>
+                <outlet property="UrliconImage" destination="NRK-g0-GCW" id="uot-EA-Ol7"/>
+                <outlet property="titleLabel" destination="oVI-i5-rtB" id="WJ3-dg-UWr"/>
+            </connections>
+            <point key="canvasLocation" x="218.5" y="140.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

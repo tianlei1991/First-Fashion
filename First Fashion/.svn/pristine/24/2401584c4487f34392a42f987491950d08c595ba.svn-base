@@ -1,0 +1,228 @@
+//
+//  BrandVC.m
+//  Togou界面
+//
+//  Created by hj on 16/9/12.
+//  Copyright © 2016年 TL. All rights reserved.
+//
+
+#import "BrandVC.h"
+#import "Brandmodel.h"
+#import "BrandHeadViewModle.h"
+#import "BrandHeadView.h"
+#import "BrandCell1.h"
+#import "BrandCell2.h"
+#import "BrandCell3.h"
+#import "BrandCell5.h"
+#import "breadCell4.h"
+@interface BrandVC ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic,strong) UITableView  *tableView;
+
+@property (nonatomic,strong) NSMutableArray *headDataSource;//头数据源
+
+
+
+@property (nonatomic,strong) NSMutableArray *DataSourec;
+
+@property (nonatomic,strong) BrandHeadView *headView;
+
+@property (nonatomic) NSInteger counti;
+@end
+
+@implementation BrandVC
+
+- (NSMutableArray *)DataSourec{
+
+    if (_DataSourec == nil) {
+        _DataSourec = [NSMutableArray array];
+    }
+    return _DataSourec;
+}
+-(NSMutableArray *)headDataSource{
+    if (_headDataSource == nil) {
+        _headDataSource = [NSMutableArray array];
+    }
+    
+    return _headDataSource;
+}
+
+
+
+
+- (void)viewDidLoad {
+
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    //创建ui
+    [self creatUI];
+        //数据下载
+    [self DownLoadData];
+    //接受通知
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(recive:) name:@"valueChange" object:nil];
+}
+- (void)DownLoadData{
+
+    //下载 头的数据。。！
+    NSArray *arr = @[BRANDHEADIMG1,BRANDHEADIMG2,BRANDHEADIMG3,BRANDHEADIMG4,BRANDHEADIMG5];
+  
+    for (NSInteger i = 0; i<arr.count; i++) {
+        AFmanage *manage = [AFmanage ShareInstance];
+        [manage getDataFormNet:arr[i] andSuccsee:^(id object) {
+            NSDictionary *dict = [NSJSONSerialization  JSONObjectWithData:object options:0 error:0];
+      
+            BrandHeadViewModle *model = [[BrandHeadViewModle alloc]initWithDictionary:dict error:nil];
+            [self.headDataSource addObject:model];
+            self.counti ++;
+            if (self.counti==arr.count) {
+                [self.headView setScrollViewPageNumber:self.headDataSource];
+                [self.tableView reloadData];
+
+            }
+            
+            
+            
+        } and:^(NSError *error) {
+            NSLog(@"%@",error);
+            
+        }];
+    }
+
+//下载cell 的数据。。
+    AFmanage *manage = [AFmanage ShareInstance];
+   [manage getDataFormNet:BRANDURL andSuccsee:^(id object) {
+       NSDictionary *dictsource = [NSJSONSerialization JSONObjectWithData:object options:0 error:0];
+       Brandmodel *model = [[Brandmodel alloc]initWithDictionary:dictsource[@"result"] error:nil];
+       [self.DataSourec addObject:model.brandList];
+       [self.DataSourec addObject:model.brandStory];
+       [self.DataSourec addObject:model.lookBook];
+       for (NSInteger i = 0; i<model.interactive.count; i++) {
+           interactiveModel *interModel = model.interactive[i];
+           [self.DataSourec addObject:interModel];
+       }
+       
+       [self.tableView reloadData];
+   } and:^(NSError *error) {
+       
+   }];
+
+
+
+}
+- (void)creatUI {
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView.contentInset  = UIEdgeInsetsMake([UIScreen mainScreen].bounds.origin.x+70, 0, 0, 0);
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.headView = [[BrandHeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN.width, 300)];
+    self.headView.backgroundColor = [UIColor orangeColor];
+    self.tableView.tableHeaderView = self.headView;
+    [self.view addSubview:self.tableView];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"BrandCell1" bundle:nil] forCellReuseIdentifier:@"BrandCell1"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"BrandCell2" bundle:nil] forCellReuseIdentifier:@"BrandCell2"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"BrandCell3" bundle:nil] forCellReuseIdentifier:@"BrandCell3"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"breadCell4" bundle:nil] forCellReuseIdentifier:@"breadCell4"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"BrandCell5" bundle:nil] forCellReuseIdentifier:@"BrandCell5"];
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSLog(@"self.cellDataSource%ld",self.DataSourec.count);
+    return self.DataSourec.count;
+
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *datasou = self.DataSourec[indexPath.row];
+    if (indexPath.row ==0) {
+        BrandCell1 *cell = [tableView dequeueReusableCellWithIdentifier:@"BrandCell1"];
+        cell.DataSource  = datasou;
+        return cell;
+    }else if (indexPath.row==1){
+        
+        BrandCell2 *cell2 = [tableView dequeueReusableCellWithIdentifier:@"BrandCell2"];
+        cell2.DataSource = datasou;
+        return cell2;
+    }else if (indexPath.row ==2){
+    
+    BrandCell3 *cell3 = [tableView dequeueReusableCellWithIdentifier:@"BrandCell3"];
+        cell3.DataSource = datasou;
+        return cell3;
+    
+    }
+    interactiveModel *interModel = self.DataSourec[indexPath.row];
+        if ([interModel.showType isEqualToString:@"7"]&&[interModel.jumpType isEqualToString:@"12"]) {
+            breadCell4 *cell4 = [tableView dequeueReusableCellWithIdentifier:@"breadCell4"];
+            cell4.model = (Brandmodel*)interModel;
+            return cell4;
+        }
+  
+    BrandCell5 *cell5 = [tableView dequeueReusableCellWithIdentifier:@"BrandCell5"];
+    cell5.model = (Brandmodel*)interModel;
+    return cell5;
+ 
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (indexPath.row == 0) {
+        return 350;
+    }else if (indexPath.row ==1){
+        return 330;
+    
+    } else if (indexPath.row ==2){
+    return 300;
+    }
+    interactiveModel *interModel = self.DataSourec[indexPath.row];
+ if ([interModel.showType isEqualToString:@"7"]&&[interModel.jumpType isEqualToString:@"12"]) {
+     return 300;
+ }
+    
+    return 123;
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+//开始拖拽视图
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.tableView.frame = self.view.bounds;
+        
+    }];
+    if (self.blcokchange) {
+        self.blcokchange();
+    }
+}
+
+#pragma mark 接收通知
+- (void)recive:(NSNotification *)noti
+{
+    
+    //获取通知内容；
+    UIView *view =  noti.object;
+    
+    //没有动画
+    [UIView animateWithDuration:0.5 animations:^{
+        //            self.tableView.contentInset = UIEdgeInsetsMake(CGRectGetMaxY(view.frame), 0, 0, 0);
+        self.tableView  .frame = CGRectMake(0,view.frame.origin.y-40, SCREEN.width, SCREEN.height);
+    }];
+    
+    [self.tableView reloadData];
+    
+    
+    
+}
+#pragma mark 移除通知
+- (void)dealloc
+{
+    //移除当前控制器的所有通知；
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    
+    //    移除某一个通知
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"valueChange" object:nil];
+    
+}
+
+
+
+
+@end

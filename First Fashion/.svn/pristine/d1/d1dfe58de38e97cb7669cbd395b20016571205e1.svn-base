@@ -1,0 +1,22 @@
+//
+//  topCollectionCell.m
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/20.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#import "topCollectionCell.h"
+#import "CustmView.h"
+@implementation topCollectionCell
+-(void)setWithdataSoucre:(NSArray *)Datasoucre{
+    
+    CustmView *cust = [[CustmView alloc]init];
+    cust.backgroundColor = [UIColor blackColor];
+    cust.frame = self.bounds;
+    [cust setWithdataSoucre:Datasoucre];
+    [self addSubview:cust];
+    
+}
+
+@end

@@ -1,0 +1,30 @@
+//
+//  PrefixHeader.pch
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/12.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#import "RKDropdownAlert.h"
+#define  SCREEN  [UIScreen mainScreen].bounds.size
+#define BACKIMG @"arrow_black_back.png"
+#import "ZYZDBManager.h"
+#import "JumpVC.h"
+#import "MJRefresh.h"
+#import "ShareWebViewController.h"
+#import "Brandmodel.h"
+#import "URLInterface.h"
+#import "MyTabbarVC.h"
+#import "AFmanage.h"
+#import "AFNetworking.h"
+#import "UIImageView+WebCache.h"
+#import "MyTabbarVC.h"
+#import "SelecTionModel.h"
+#import "SelctHeadModel.h"
+#import "Helper.h"
+#import "shareWebViewVC2.h"
+#import "CLLocation+LXH.h"
+#endif /* PrefixHeader_pch */

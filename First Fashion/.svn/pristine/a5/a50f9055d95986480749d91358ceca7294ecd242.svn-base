@@ -1,0 +1,25 @@
+//
+//  PrefixHeader.pch
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/12.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#define  SCREEN  [UIScreen mainScreen].bounds.size
+
+
+
+#import "ShareWebViewController.h"
+#import "Brandmodel.h"
+#import "URLInterface.h"
+#import "MyTabbarVC.h"
+#import "AFmanage.h"
+#import "AFNetworking.h"
+#import "UIImageView+WebCache.h"
+#import "MyTabbarVC.h"
+#import "SelecTionModel.h"
+#import "SelctHeadModel.h"
+#endif /* PrefixHeader_pch */

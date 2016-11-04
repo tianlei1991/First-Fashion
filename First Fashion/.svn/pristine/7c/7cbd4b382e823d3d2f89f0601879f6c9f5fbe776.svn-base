@@ -1,0 +1,111 @@
+//
+//  MyTabbarVC.m
+//  Togou界面
+//
+//  Created by hj on 16/9/12.
+//  Copyright © 2016年 TL. All rights reserved.
+//
+
+#import "MyTabbarVC.h"
+#import "SelecTionVC.h"
+#import "DiscoverVC.h"
+#import "BrandVC.h"
+@interface MyTabbarVC ()
+//就两个view，titleView是最上面个那个view,tabbarView是下面的那个view
+@property (nonatomic,strong) UIView *TabbarView;//标签
+@property (nonatomic,strong) UIView *TitleView;//导航栏
+@property (nonatomic,strong) UILabel *ContentLabe;//导航栏label
+@property (nonatomic,strong) SelecTionVC *selctVC;
+@property (nonatomic,strong) DiscoverVC *discover;
+@property (nonatomic,strong) BrandVC *brand;
+
+@end
+
+@implementation MyTabbarVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.tabBar.hidden = YES;
+    self.TitleView = [[UIView alloc]initWithFrame:CGRectMake(0, 20, SCREEN.width, 20)];
+    self.TitleView.backgroundColor = [UIColor whiteColor];
+    self.ContentLabe = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN.width-40,20)];
+     self.ContentLabe.text = @"最上面的那个label";
+    self.ContentLabe.hidden = YES;
+    [self.TitleView addSubview:self.ContentLabe];
+    [self.view addSubview:self.TitleView];
+    
+    
+ }
+
+- (void)setButtNumber:(NSInteger)Number{
+    if (Number==3) {
+      self.selctVC = [[SelecTionVC alloc]init];
+       self.discover = [[DiscoverVC alloc]init];
+       self.brand = [[BrandVC alloc]init];
+        self.viewControllers = @[self.selctVC,self.discover,self.brand];
+        
+        
+    }else{
+        self.selctVC = [[SelecTionVC alloc]init];
+        self.discover = [[DiscoverVC alloc]init];
+         self.viewControllers = @[self.selctVC,self.discover];
+        }
+    
+  
+    [self CreatButt:Number];
+#pragma mark 回调动画
+    __weak typeof(self)weakself = self;
+    [self.selctVC setBlcokchange:^{
+        [UIView animateWithDuration:0.5 animations:^{
+       
+            weakself.TitleView.frame = CGRectMake(0, 20, SCREEN.width, 20);
+            weakself.TabbarView.frame = CGRectMake(0, CGRectGetMaxY(weakself.TitleView.frame),SCREEN.width,50);
+        }];
+        
+    }];
+
+}
+
+- (void)CreatButt:(NSInteger )Number
+{
+  self.TabbarView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.TitleView.frame),SCREEN.width,50)];
+    self.TabbarView.backgroundColor = [UIColor redColor];
+    for (NSInteger i = 0; i<Number; i++) {
+        UIButton *but = [UIButton buttonWithType:UIButtonTypeCustom];
+        but.frame = CGRectMake(i*(SCREEN.width/3), 20, SCREEN.width/3, CGRectGetHeight(self.TabbarView.frame)-20);
+        but.backgroundColor = [UIColor brownColor];
+        [but setTitle:@"点哇" forState:UIControlStateNormal];
+        [but addTarget:self action:@selector(Buttcilck:) forControlEvents:UIControlEventTouchUpInside];
+        but.tag = i;
+        [self.TabbarView addSubview:but];
+    }
+    //中间三个点，图片 点击Butt展开的
+    UIButton *ImagButt = [UIButton buttonWithType:UIButtonTypeCustom];
+    ImagButt.frame = CGRectMake(SCREEN.width/2-15,0, 30, 20);
+    ImagButt.backgroundColor = [UIColor blackColor];
+    [ImagButt addTarget:self action:@selector(ImageAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.TabbarView addSubview:ImagButt];
+      [self.view addSubview:self.TabbarView];
+}
+
+- (void)Buttcilck:(UIButton *) sendr
+{
+    self.selectedIndex = sendr.tag;
+
+}
+#pragma mark 触发动画下移动
+- (void)ImageAction
+{
+
+   [UIView animateWithDuration:0.5 animations:^{
+       self.TitleView.frame = CGRectMake(0, 20, SCREEN.width, 100);
+       self.TabbarView.frame = CGRectMake(0, CGRectGetMaxY(self.TitleView.frame), SCREEN.width, 50);
+       self.ContentLabe.hidden = NO;
+   }];
+    //高度为100，y坐标为120所以要减去20
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"valueChange" object:self.TabbarView];
+}
+
+
+@end

@@ -1,0 +1,207 @@
+//
+//  SelecTionVC.m
+//  Togou界面
+//
+//  Created by hj on 16/9/12.
+//  Copyright © 2016年 TL. All rights reserved.
+//
+
+#import "SelecTionVC.h"
+#import "Cell1.h"
+#import "HeadView.h"
+#import "Cell2.h"
+#import "Cell3.h"
+#import "Cell4.h"
+
+@interface SelecTionVC ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic,strong) UITableView *tableView;
+
+@property (nonatomic,strong) NSMutableArray *DataSource;
+
+@property (nonatomic,strong) NSMutableArray *ListDataSource;
+
+@property (nonatomic,strong) HeadView *head;
+@end
+
+@implementation SelecTionVC
+- (NSMutableArray *)DataSource{
+    if (_DataSource==nil) {
+        _DataSource = [NSMutableArray array];
+    }
+    return _DataSource;
+
+}
+- (NSMutableArray *)ListDataSource{
+    if (_ListDataSource == nil) {
+        _ListDataSource = [NSMutableArray array];
+    }
+
+    return _ListDataSource;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    //为什么我这里影藏全部都隐藏了。。！
+    self.navigationController.navigationBar.hidden = YES;
+   
+    
+    //下载数据
+    [self DonwLoadDataSource];
+  
+    //创建UI
+    [self CreatUI];
+    [self CreatHeadView];
+    
+   }
+- (void)DonwLoadDataSource{
+    AFmanage *manger = [[AFmanage alloc]init];
+    [manger getDataFormNet:SELECURL andSuccsee:^(id object) {
+         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:object options:0 error:0];
+         NSArray *listArr =  dic[@"result"][@"list"];
+         NSArray *headarr =  listArr[0][@"bannerList"];
+        for (NSDictionary *headDic in headarr) {
+            SelctHeadModel * model = [[SelctHeadModel alloc]initWithDictionary:headDic error:nil];
+            [self.DataSource addObject:model];
+        }
+        
+            for (NSDictionary *dict in listArr) {
+            SelecTionModel *model = [[SelecTionModel alloc]initWithDictionary:dict error:nil];
+            
+            [self.ListDataSource addObject:model];
+        }
+           [self.head setScrollViewPageNumber:self.DataSource];
+        [self.tableView reloadData];
+    } and:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+
+}
+
+- (void)CreatUI{
+   
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+      self.tableView.contentInset = UIEdgeInsetsMake([UIScreen mainScreen].bounds.origin.x+70, 0, 0, 0);
+          [self.view addSubview:self.tableView];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"Cell1" bundle:nil] forCellReuseIdentifier:@"Cell1"];
+   
+    [self.tableView registerNib:[UINib nibWithNibName:@"Cell2" bundle:nil] forCellReuseIdentifier:@"Cell2"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"Cell3" bundle:nil] forCellReuseIdentifier:@"Cell3"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"Cell4" bundle:nil] forCellReuseIdentifier:@"Cell4"];
+   
+   
+
+}
+
+- (void)CreatHeadView
+{
+    self.head = [[HeadView alloc]init];
+    self.head.frame = CGRectMake(0, 0, SCREEN.width, 300);
+    self.head.backgroundColor = [UIColor redColor];
+    self.tableView.tableHeaderView = self.head;
+   //获取通知！
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(recive:) name:@"valueChange" object:nil];
+    
+
+
+}
+
+#pragma mark tableview代理
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+  
+    return self.ListDataSource.count;
+    
+  
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+ SelecTionModel *model = self.ListDataSource[indexPath.row];
+    UITableViewCell *cell  = [[UITableViewCell alloc ]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];;
+
+    if ([model.showType  isEqual:@"1"] && [model.jumpType isEqualToString:@"1"]) {
+          Cell1  *cell1 = [tableView dequeueReusableCellWithIdentifier:@"Cell1"];
+        cell1.model = model;
+        return cell1;
+    }else if([model.showType isEqualToString:@"2"] &&[model.jumpType isEqualToString:@"1"]){
+        Cell2 *cell2 = [tableView dequeueReusableCellWithIdentifier:@"Cell2"];
+        cell2.model = model;
+        return cell2;
+    } else if ([model.showType isEqualToString:@"4"] &&[model.jumpType isEqualToString:@"7"]) {
+        Cell3 *cell3 = [tableView dequeueReusableCellWithIdentifier:@"Cell3"];
+        cell3.model = model;
+        return cell3;
+    }else if ([model.showType isEqualToString:@"22"]){
+        Cell4 *cell4 = [tableView dequeueReusableCellWithIdentifier:@"Cell4"];
+        cell4.model = model;
+        return cell4;
+    
+    }
+    return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    SelecTionModel *model = self.ListDataSource[indexPath.row];
+   
+    if ([model.showType  isEqual:@"1"] && [model.jumpType isEqualToString:@"1"]) {
+        
+        return 360;
+    }else if([model.showType isEqualToString:@"2"] &&[model.jumpType isEqualToString:@"1"]){
+       
+        return 123;
+    } else if ([model.showType isEqualToString:@"4"] &&[model.jumpType isEqualToString:@"7"]){
+   
+        return  235;
+    }else if ([model.showType isEqualToString:@"22"]){
+    
+        return 250;
+    }
+    else
+    return 0;
+}
+
+
+
+//开始拖拽视图
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.tableView.frame = self.view.bounds;
+
+    }];
+    if (self.blcokchange) {
+        self.blcokchange();
+    }
+}
+#pragma mark 接收通知
+- (void)recive:(NSNotification *)noti
+{
+    
+    //获取通知内容；
+    UIView *view =  noti.object;
+    
+    //没有动画
+    [UIView animateWithDuration:0.5 animations:^{
+        //            self.tableView.contentInset = UIEdgeInsetsMake(CGRectGetMaxY(view.frame), 0, 0, 0);
+        self.tableView.frame = CGRectMake(0,view.frame.origin.y-40, SCREEN.width, SCREEN.height);
+    }];
+    
+    [self.tableView reloadData];
+    
+    
+    
+}
+#pragma mark 移除通知
+- (void)dealloc
+{
+    //移除当前控制器的所有通知；
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    
+    //    移除某一个通知
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"valueChange" object:nil];
+    
+}
+@end

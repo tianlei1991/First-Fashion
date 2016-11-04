@@ -1,0 +1,13 @@
+//
+//  SelecTionVC.h
+//  Togou界面
+//
+//  Created by hj on 16/9/12.
+//  Copyright © 2016年 TL. All rights reserved.
+//
+
+
+#import "FatherVC.h"
+@interface SelecTionVC : FatherVC
+
+@end

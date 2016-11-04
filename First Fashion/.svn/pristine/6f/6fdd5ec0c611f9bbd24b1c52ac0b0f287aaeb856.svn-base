@@ -1,0 +1,57 @@
+//
+//  topCell.m
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/20.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#import "topCell.h"
+#import "topCollectionCell.h"
+#import "TopLestModel.h"
+@interface topCell()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@property (weak, nonatomic) IBOutlet UICollectionView *TopCollectionView;
+@property (nonatomic,strong) NSMutableArray *DataSoucreArr;
+@end
+@implementation topCell
+- (NSMutableArray *)DataSoucreArr{
+    if (_DataSoucreArr == nil) {
+        _DataSoucreArr = [NSMutableArray array];
+    }
+    return _DataSoucreArr;
+}
+- (void)setDataSoucre:(NSArray *)dataSoucre{
+    _dataSoucre = dataSoucre;
+    self.TopCollectionView.dataSource = self;
+    self.TopCollectionView.delegate = self;
+    [self.TopCollectionView registerClass:[topCollectionCell class] forCellWithReuseIdentifier:@"topCollectionCell"];
+
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+
+    return 1;
+
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    topCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"topCollectionCell" forIndexPath:indexPath];
+   NSInteger arrcount= self.dataSoucre.count;
+    NSLog(@"%ld",self.dataSoucre.count);
+    NSInteger count = (arc4random() % arrcount);
+      NSLog(@"count%ld",count);
+    [self.DataSoucreArr removeAllObjects];
+
+    for (NSInteger i = 0; i<count; i++) {
+        
+        TopLestModel *modle = self.dataSoucre[i];
+        [self.DataSoucreArr addObject:modle];
+
+    }
+    
+    [cell setWithdataSoucre:self.DataSoucreArr];
+    
+    return cell;
+
+}
+
+
+@end

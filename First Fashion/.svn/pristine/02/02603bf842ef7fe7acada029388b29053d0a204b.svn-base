@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="235" id="KGk-i7-Jjw" customClass="Cell3">
+            <rect key="frame" x="0.0" y="0.0" width="346" height="235"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="346" height="234"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68E-vK-l4V">
+                        <rect key="frame" x="0.0" y="0.0" width="346" height="234"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="LkT-Vk-4rv">
+                                <rect key="frame" x="0.0" y="8" width="346" height="218"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="LkT-Vk-4rv" secondAttribute="trailing" id="Mxa-01-XuZ"/>
+                            <constraint firstItem="LkT-Vk-4rv" firstAttribute="top" secondItem="68E-vK-l4V" secondAttribute="top" constant="8" id="fW5-w8-OIj"/>
+                            <constraint firstAttribute="bottom" secondItem="LkT-Vk-4rv" secondAttribute="bottom" constant="8" id="hA5-qx-yDY"/>
+                            <constraint firstItem="LkT-Vk-4rv" firstAttribute="leading" secondItem="68E-vK-l4V" secondAttribute="leading" id="law-ts-ThH"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="68E-vK-l4V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="04o-of-sOR"/>
+                    <constraint firstAttribute="trailing" secondItem="68E-vK-l4V" secondAttribute="trailing" id="GQ5-EO-jZo"/>
+                    <constraint firstAttribute="bottom" secondItem="68E-vK-l4V" secondAttribute="bottom" id="TT2-t1-jZ6"/>
+                    <constraint firstItem="68E-vK-l4V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="jel-mh-rN4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="coverImage" destination="LkT-Vk-4rv" id="ZKv-wd-vPu"/>
+            </connections>
+            <point key="canvasLocation" x="148" y="135.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="1.jpg" width="570" height="378"/>
+    </resources>
+</document>

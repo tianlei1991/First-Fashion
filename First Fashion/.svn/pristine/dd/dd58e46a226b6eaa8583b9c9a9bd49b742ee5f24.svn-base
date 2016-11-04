@@ -1,0 +1,33 @@
+//
+//  BrandHeadView.m
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/21.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#import "BrandHeadView.h"
+#import "BrandHeadViewModle.h"
+@implementation BrandHeadView
+-(void)setScrollViewPageNumber:(NSArray *)datasourec{
+    
+    
+    UIScrollView *scrollview = [[UIScrollView alloc]initWithFrame:self.bounds];
+    scrollview.pagingEnabled = YES;
+    scrollview.contentSize = CGSizeMake(self.bounds.size.width*datasourec.count, 0);
+    NSInteger i =0;
+    for (BrandHeadViewModle * model in datasourec) {
+        UIImageView *imgv = [[UIImageView alloc]init];
+        
+        imgv.frame = CGRectMake(i*SCREEN.width, 0, SCREEN.width, self.bounds.size.height);
+        [imgv sd_setImageWithURL:[NSURL URLWithString:model.shareImg] placeholderImage:[UIImage imageNamed:@"1.jpg"]];
+        [scrollview addSubview:imgv];
+        i++;
+    }
+    
+    
+    [self addSubview:scrollview];
+    
+    
+}
+@end

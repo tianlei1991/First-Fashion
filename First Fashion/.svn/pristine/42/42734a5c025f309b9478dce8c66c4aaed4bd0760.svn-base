@@ -1,0 +1,28 @@
+//
+//  PrefixHeader.pch
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/12.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#define  SCREEN  [UIScreen mainScreen].bounds.size
+//精选url
+#define SELECURL  @"http://moguapp.mogujie.com/v3/news/selected?_network=1&_atype=ios&dayTime=1473831101655&_t=1473831102&_app=mogu&_channel=NIGAppStore&_lang=0&_cityId=13a&_version=2.4.2&sign=&_locationPos=22.583179%2C113.956915&_fs=ios&_at=0f3801637851fe0c&_swidth=640&_ab=2546&strDayTime=2016-09-14%2013%3A31%3A41&_newdid=cd94df6283ab9992cebe19c1595d6540&_pt=0&mpage=&_uid=1257400a&prepage=&_country=%E4%B8%AD%E5%9B%BD&minfo=iPhone4%2C1&preview=0&_ip=192.168.2.38&_location=%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%8D%97%E5%B1%B1%E5%8C%BA%E6%A1%83%E6%BA%90%E8%A1%97%E9%81%93%E7%95%99%E4%BB%99%E5%A4%A7%E9%81%931285-15%E5%8F%B7&_av=242"
+//发现
+#define DISCOVERURL @"http://moguapp.mogujie.com/v3/discover?_network=1&_atype=ios&_t=1474284428&_app=mogu&_channel=NIGAppStore&_lang=0&_cityId=13a&_version=2.4.2&_locationPos=22.584953%2C113.957459&_fs=ios&sign=&_at=8cd63a9a399f7ced&_swidth=640&_ab=2546&_newdid=cd94df6283ab9992cebe19c1595d6540&_pt=0&_uid=1257400a&_country=%E4%B8%AD%E5%9B%BD&minfo=iPhone4%2C1&preview=0&_ip=192.168.2.38&_location=%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%8D%97%E5%B1%B1%E5%8C%BA%E6%A1%83%E6%BA%90%E8%A1%97%E9%81%93%E7%95%99%E4%BB%99%E5%A4%A7%E9%81%93&_av=242"
+
+
+
+
+
+#import "MyTabbarVC.h"
+#import "AFmanage.h"
+#import "AFNetworking.h"
+#import "UIImageView+WebCache.h"
+#import "MyTabbarVC.h"
+#import "SelecTionModel.h"
+#import "SelctHeadModel.h"
+#endif /* PrefixHeader_pch */

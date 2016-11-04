@@ -1,0 +1,27 @@
+//
+//  BrandCell5.m
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/22.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#import "BrandCell5.h"
+@interface BrandCell5()
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *coverImage;
+@end
+@implementation BrandCell5
+- (void)setModel:(Brandmodel *)model{
+    interactiveModel *model1 = (interactiveModel *)model;
+    self.titleLabel.text = model1.title;
+    [self.coverImage sd_setImageWithURL:[NSURL URLWithString:model1.coverImg] placeholderImage:[UIImage imageNamed:@"1"]];
+    
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
+
+@end

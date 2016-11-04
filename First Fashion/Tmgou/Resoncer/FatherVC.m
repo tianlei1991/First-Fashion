@@ -1,0 +1,44 @@
+//
+//  FatherVC.m
+//  Togou界面
+//
+//  Created by hj on 16/9/12.
+//  Copyright © 2016年 TL. All rights reserved.
+//
+
+#import "FatherVC.h"
+
+@interface FatherVC ()
+@property (nonatomic,strong)UIView *TitleView;
+@end
+
+@implementation FatherVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+//这个方法完全没有用，而是在selecTion里面才有用。。！搞不清楚！
+//- (void)CreatTitlView{
+//    self.TitleView = [[UIView alloc]initWithFrame:CGRectMake(0, 20, SCREEN.width, 64)];
+//    self.TitleView.backgroundColor = [UIColor whiteColor];
+//    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN.width-40,25)];
+//    lab.text = @"asdasdasd";
+//    [self.TitleView addSubview:lab];
+//    [self.view addSubview:self.TitleView];
+//
+//}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+   
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+    
+    
+}
+
+@end

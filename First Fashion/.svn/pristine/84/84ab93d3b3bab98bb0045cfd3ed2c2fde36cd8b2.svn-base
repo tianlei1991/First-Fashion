@@ -1,0 +1,59 @@
+//
+//  BrandCell1.m
+//  Tmgou
+//
+//  Created by qianfeng on 16/9/21.
+//  Copyright © 2016年 qianfeng. All rights reserved.
+//
+
+#import "BrandCell1.h"
+#import "BrandCollertionCell1.h"
+@interface BrandCell1()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@property (weak, nonatomic) IBOutlet UICollectionView *collection;
+@property (nonatomic,strong) NSArray *DataSource;
+@end
+@implementation BrandCell1
+
+- (void)setModel:(Brandmodel *)model{
+
+    self.DataSource = model.brandList;
+    [self CreatUI];
+
+}
+
+-(void)CreatUI{
+    self.collection.dataSource = self;
+    self.collection.delegate = self;
+    
+    
+    //   self.layou.itemSize = CGSizeMake(80, 120);
+    //   self.layou.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    [self.collection registerNib:[UINib nibWithNibName:@"BrandCollertionCell1" bundle:nil] forCellWithReuseIdentifier:@"BrandCollertionCell1"];
+    
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
+    
+    return self.DataSource.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    BrandCollertionCell1 *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BrandCollertionCell1" forIndexPath:indexPath];
+    cell.model = self.DataSource[indexPath.row];
+    return cell;
+    
+    
+}
+- (void)awakeFromNib {
+    [super awakeFromNib];
+   
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+   
+}
+
+@end
